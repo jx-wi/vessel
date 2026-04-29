@@ -1,0 +1,24 @@
+keys:
+  - &admin age12h7uw2sh7z37420tyxy0dlhssug9er7sedn556wg87t4n9tp35jsfz8kmy
+  - &iridium age1v9uqa0nrwe3a3d67nefyx7u2t347etwmg9gffesepulckcta8qgsgsywfd
+creation_rules:
+  - path_regex: secrets/iridium/ssh\.yaml$
+    key_groups:
+      - age:
+        - *admin
+        - *iridium
+  - path_regex: secrets/iridium/tailscale\.yaml$
+    key_groups:
+      - age:
+        - *admin
+        - *iridium
+  - path_regex: secrets/iridium/jaxxen/password\.yaml$
+    key_groups:
+      - age:
+        - *admin
+        - *iridium
+  - path_regex: secrets/jaxxen/accounts_keyfile\.yaml$
+    key_groups:
+      - age:
+        - *admin
+        - *iridium

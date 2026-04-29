@@ -1,0 +1,34 @@
+{
+  pkgs,
+  ...
+}:
+with pkgs; [
+  age
+  bat
+  bottom
+  curl
+  deadnix
+  delta
+  eza
+  fd
+  gh
+  git
+  gitui
+  jq
+  keepassxc
+  killall
+  nh
+  nix-tree
+  nixfmt
+  ripgrep
+  skim
+  smem
+  sops
+  ssh-to-age
+  statix
+  tree
+  uutils-coreutils-noprefix
+  yazi
+  yq-go
+  zoxide
+]
