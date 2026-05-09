@@ -292,6 +292,42 @@ in {
       defaultEditor = true;
       imports = [ ./nixvim.nix ];
     };
+    prismlauncher = {
+      enable = true;
+      settings = {
+        ApplicationTheme = "system";
+        AutoCloseConsole = false;
+        AutomaticJavaDownload = false;
+        AutomaticJavaSwitch = true;
+        BackgroundCat = "rory-flat";
+        CatFit = "fit";
+        CatOpacity = 100;
+        CloseAfterLaunch = true;
+        ConfigVersion = 1.3;
+        ConsoleMaxLines = 1000;
+        ConsoleOverflowStop = true;
+        EnableFeralGamemode = true;
+        FallbackMRBlockedMods = 2;
+        IconTheme = "pe_light";
+        IgnoreJavaCompatibility = false;
+        IgnoreJavaWizard = true;
+        JavaPath = "${pkgs.openjdk}/bin/java";
+        Language = "en_US";
+        LaunchMaximized = false;
+        LowMemWarning = true;
+        MaxMemAlloc = 8192;
+        MinMemAlloc = 4096;
+        MinecraftWinHeight = 1440;
+        MinecraftWinWidth = 2560;
+        QuitAfterGameStop = true;
+        ShowConsole = false;
+        ShowConsoleOnError = true;
+        UseNativeGLFW = false;
+        UseNativeOpenAL = false;
+        UseZink = true;
+        UserAskedAboutAutomaticJavaDownload = true;
+      };
+    };
     ripgrep.enable = true;
     rofi = {
       enable = true;
