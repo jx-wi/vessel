@@ -69,7 +69,6 @@
       };
     };
     lualine.enable = true;
-    scope.enable = true;
     treesitter = {
       enable = true;
       nixGrammars = true;
