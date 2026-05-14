@@ -484,6 +484,25 @@ in {
         urgency_critical.timeout = 0;
       };
     };
+    hyprsunset = {
+      enable = true;
+      settings.profile = [
+        {
+          time = "00:00";
+          identity = true;
+        }
+        {
+          time = "10:00";
+          temperature = 5500;
+          gamma = 0.95;
+        }
+        {
+          time = "13:00";
+          temperature = 4000;
+          gamma = 0.75;
+        }
+      ];
+    };
     ollama = {
       enable = true;
       acceleration = "cuda";
