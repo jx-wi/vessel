@@ -59,6 +59,7 @@ in {
       libreoffice
       playerctl
       qalculate-qt
+      quickemu
       trash-cli
       ungoogled-chromium
       wiremix
