@@ -262,6 +262,7 @@
         "/var/log"
       ];
       users.jaxxen.directories = [
+        ".claude"
         ".librewolf"
         ".local/share"
         ".local/state/nix"

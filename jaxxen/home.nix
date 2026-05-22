@@ -55,6 +55,7 @@ in {
     '';
     packages = with pkgs; [
       awww
+      claude-monitor
       font.package
       libreoffice
       playerctl
@@ -103,7 +104,7 @@ in {
       '')
     ] ++ zsh.packages ++ utils;
   };
-  nixpkgs.config.allowUnfreePredicate = pkgs._cuda.lib.allowUnfreeCudaPredicate;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "claude-code" ] || pkgs._cuda.lib.allowUnfreeCudaPredicate pkg;
   news.display = "silent";
   fonts.fontconfig = {
     enable = true;
@@ -149,6 +150,19 @@ in {
     home-manager.enable = true;
     bat.enable = true;
     bottom.enable = true;
+    claude-code = {
+      enable = true;
+      settings = {
+        theme = "dark";
+        permissions.defaultMode = "acceptEdits";
+      };
+      lspServers = {
+        nixd = {
+          command = "nixd";
+          extensionToLanguage.".nix" = "nix";
+        };
+      };
+    };
     delta = {
       enable = true;
       enableGitIntegration = true;
@@ -504,7 +518,7 @@ in {
       ];
     };
     ollama = {
-      enable = true;
+      enable = false;
       acceleration = "cuda";
       environmentVariables.OLLAMA_KEEP_ALIVE = "3m";
     };
