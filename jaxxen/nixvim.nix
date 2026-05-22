@@ -53,10 +53,6 @@
         };
       };
     };
-    cmp-ai = {
-      enable = true;
-      callSetup = false;
-    };
     indent-blankline.enable = true;
     lsp = {
       enable = true;
@@ -79,28 +75,4 @@
       };
     };
   };
-  extraConfigLua = ''
-    vim.fn.jobstart({'curl', '-sf', 'http://localhost:11434'}, {
-      on_exit = function(_, code)
-        if code == 0 then
-          require('cmp_ai.config'):setup({
-            max_lines = 100,
-            provider = 'Ollama',
-            provider_options = {
-              model = 'qwen2.5-coder:14b',
-              suffix = function(lines_after)
-                return lines_after
-              end,
-            },
-            notify = false,
-            run_on_every_keystroke = false,
-          })
-          local cmp = require('cmp')
-          local sources = cmp.get_config().sources
-          table.insert(sources, 1, { name = 'cmp_ai' })
-          cmp.setup({ sources = sources })
-        end
-      end,
-    })
-  '';
 }

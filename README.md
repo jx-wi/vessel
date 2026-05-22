@@ -137,7 +137,7 @@ Reboot and verify LUKS unlocks automatically without a passphrase prompt.
 
 - **Standalone home-manager:** No elevated permissions required to manage your user-level configurations
 - **Zsh:** Powerlevel10k instant prompt + autosuggestions + syntax highlighting + vim-style navigation
-- **Nixvim:** AI-powered autocomplete + treesitter + lsp for nix/md/js/ts/py
+- **Nixvim:** Treesitter + LSP for nix/md/js/ts/py
 - **Desktop:** Personalized Hyprland + Ghostty + Rofi + Dunst + LibreWolf
 - **Theme:** Maple Mono NF + TokyoNight Night (Ghostty) + Catppuccin Mocha (Nixvim) + Graphite Black (GTK/Qt)
 
@@ -149,15 +149,6 @@ While logged in as jaxxen:
 nh home switch github:jx-wi/vessel
 ```
 
-> [!NOTE]
-> The `extraConfigLua` block in `jaxxen/nixvim.nix` configures cmp-ai to use qwen2.5-coder:14b via ollama by default.
-> If you don't have that model installed via ollama, nixvim will fall back to using lsp > path > buffer for completions.
-> If you wish to use a different AI model or platform, clone this repository and tweak the `extraConfigLua` block in `jaxxen/nixvim.nix`
-
-> [!WARNING]
-> If you don't have ollama configured to be GPU-accelerated, or don't have a sufficient amount of VRAM for the model you are running (12G+ needed for a 14b model), running an AI model will be extremely unperformant and greatly slow your system down.
-> If you don't have capable enough hardware, don't install the model that Nixvim will try to run or disable the ollama service.
-
 ---
 
 ## Dev shell
@@ -166,7 +157,7 @@ nh home switch github:jx-wi/vessel
 
 - **Universal:** Accessible from any system with Nix via a single command
 - **Zsh:** Powerlevel10k instant prompt, autosuggestions, syntax highlighting, & vim-style navigation
-- **Nixvim:** AI-powered autocomplete, treesitter, lsp for nix+md+js+ts+py, Catppuccin Mocha theme
+- **Nixvim:** Treesitter, LSP for nix+md+js+ts+py, Catppuccin Mocha theme
 - **Packages:** nh, git, sops, age, ssh-to-age, ...
 
 ### Usage
@@ -174,6 +165,3 @@ nh home switch github:jx-wi/vessel
 ```bash
 nix develop github:jx-wi/vessel
 ```
-
-> [!NOTE]
-> The same notes and warnings from the home-manager section above apply to this dev shell, as they leverage the same Nixvim configuration.
