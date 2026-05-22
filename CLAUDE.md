@@ -28,6 +28,16 @@ nh os switch --update        # Update flake inputs + apply NixOS
 nix flake check              # Check the flake
 ```
 
+## Git workflow
+
+`main` is branch-protected — never push directly. Always branch, push the branch, and open a PR. CI runs `nix flake check` on PRs automatically.
+
+```bash
+git checkout -b your-branch
+# make changes, commit
+git push origin your-branch
+```
+
 ## Key Patterns
 
 ### Impermanence
