@@ -154,7 +154,34 @@ in {
       enable = true;
       settings = {
         theme = "dark";
-        permissions.defaultMode = "acceptEdits";
+        includeCoAuthoredBy = false;
+        permissions = {
+          defaultMode = "plan";
+          allow = [
+            "Read"
+            "Bash(git log:*)"
+            "Bash(git status:*)"
+            "Bash(git diff:*)"
+            "Bash(git show:*)"
+            "Bash(git branch:*)"
+            "Bash(ls:*)"
+            "Bash(eza:*)"
+            "Bash(grep:*)"
+            "Bash(rg:*)"
+            "Bash(cat:*)"
+            "Bash(bat:*)"
+            "Bash(echo:*)"
+            "Bash(pwd:*)"
+            "Bash(which:*)"
+            "Bash(wc:*)"
+            "Bash(head:*)"
+            "Bash(tail:*)"
+            "Bash(jq:*)"
+            "Bash(nix flake show:*)"
+            "Bash(nix flake check:*)"
+            "Bash(nix eval:*)"
+          ];
+        };
       };
       lspServers = {
         nixd = {
