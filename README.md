@@ -121,14 +121,6 @@ sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 /dev/nvme0n1p2
 
 Reboot and verify LUKS unlocks automatically without a passphrase prompt.
 
-> [!NOTE]
-> TPM2 enrollment changes PCR values, which invalidates libvirtd's TPM-bound encryption key.
-> Iridium ships with libvirtd + virt-manager by default, so reset the key after enrollment:
-> ```bash
-> sudo rm /var/lib/libvirt/secrets/secrets-encryption-key
-> sudo systemctl start libvirtd
-> ```
-
 ---
 
 ## Jaxxen's home-manager
