@@ -154,7 +154,6 @@ in {
       enable = true;
       settings = {
         theme = "dark";
-        includeCoAuthoredBy = false;
         permissions = {
           defaultMode = "plan";
           allow = [
@@ -187,6 +186,72 @@ in {
         nixd = {
           command = "nixd";
           extensionToLanguage.".nix" = "nix";
+        };
+        typescript = {
+          command = "typescript-language-server";
+          args = [ "--stdio" ];
+          extensionToLanguage = {
+            ".ts" = "typescript";
+            ".tsx" = "typescriptreact";
+            ".js" = "javascript";
+            ".jsx" = "javascriptreact";
+          };
+        };
+        html = {
+          command = "vscode-html-language-server";
+          args = [ "--stdio" ];
+          extensionToLanguage = {
+            ".html" = "html";
+            ".htm" = "html";
+          };
+        };
+        css = {
+          command = "vscode-css-language-server";
+          args = [ "--stdio" ];
+          extensionToLanguage = {
+            ".css" = "css";
+            ".scss" = "scss";
+            ".less" = "less";
+          };
+        };
+        rust = {
+          command = "rust-analyzer";
+          extensionToLanguage.".rs" = "rust";
+        };
+        python = {
+          command = "pyright-langserver";
+          args = [ "--stdio" ];
+          extensionToLanguage.".py" = "python";
+        };
+        eslint = {
+          command = "vscode-eslint-language-server";
+          args = [ "--stdio" ];
+          extensionToLanguage = {
+            ".js" = "javascript";
+            ".jsx" = "javascriptreact";
+            ".ts" = "typescript";
+            ".tsx" = "typescriptreact";
+          };
+        };
+        markdown = {
+          command = "markdown-oxide";
+          extensionToLanguage.".md" = "markdown";
+        };
+        json = {
+          command = "vscode-json-language-server";
+          args = [ "--stdio" ];
+          extensionToLanguage = {
+            ".json" = "json";
+            ".jsonc" = "jsonc";
+          };
+        };
+        yaml = {
+          command = "yaml-language-server";
+          args = [ "--stdio" ];
+          extensionToLanguage = {
+            ".yaml" = "yaml";
+            ".yml" = "yaml";
+          };
         };
       };
     };

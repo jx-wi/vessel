@@ -57,10 +57,19 @@
     lsp = {
       enable = true;
       servers = {
+        cssls.enable = true;
         eslint.enable = true;
+        html.enable = true;
+        jsonls.enable = true;
         markdown_oxide.enable = true;
         nixd.enable = true;
         pyright.enable = true;
+        yamlls.enable = true;
+        rust_analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+        };
         ts_ls.enable = true;
       };
     };
