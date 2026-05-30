@@ -66,19 +66,6 @@ in {
       wiremix
       wl-clipboard-rs
       xdg-desktop-portal-termfilechooser
-      (writers.writeDashBin "wallpaper" ''
-        rm -rf ${config.home.homeDirectory}/Pictures/.jxwallpapers ${config.home.homeDirectory}/Pictures/.jxwallpaper
-        git clone --depth=1 https://github.com/jx-wi/wallpapers ${config.home.homeDirectory}/Pictures/.jxwallpapers
-        mkdir -p ${config.home.homeDirectory}/Pictures/Wallpapers/jxwallpaper
-        cp ${config.home.homeDirectory}/Pictures/.jxwallpapers/LICENSE ${config.home.homeDirectory}/Pictures/.jxwallpaper
-        cp ${config.home.homeDirectory}/Pictures/.jxwallpapers/README.md ${config.home.homeDirectory}/Pictures/.jxwallpaper
-        cp $(
-          find ${config.home.homeDirectory}/Pictures/.jxwallpapers -type f -name "*.jpg" -o -name "*.png" -o -name "*.webp" \
-          | shuf -n 1
-        ) ${config.home.homeDirectory}/Pictures/Wallpapers/jxwallpaper/wallpaper
-        rm -rf ${config.home.homeDirectory}/Pictures/.jxwallpapers
-        printf '%s' ${config.home.homeDirectory}/Pictures/Wallpapers/jxwallpaper/wallpaper
-      '')
       (writers.writeDashBin "toggle-hdr" ''
         on () {
           hyprctl keyword monitor "DP-3,2560x1440@180,0x0,1,bitdepth,10,cm,hdr,sdrbrightness,1.4,vrr,3";
@@ -762,9 +749,8 @@ in {
       ];
       exec-once = [
         "awww-daemon"
-        "wallpaper ; awww img ${config.home.homeDirectory}/Pictures/Wallpapers/jxwallpaper/wallpaper || awww clear 000000"
-        ''[[ -f ${config.home.homeDirectory}/Documents/startup-message.md ]] && cat ${config.home.homeDirectory}/Documents/startup-message.md | while read line; do dunstify "$line"; done''
-        "mv ~/ly-session.log ~/.ly-session.log"
+        "awww clear 000000"
+        "mv ${config.home.homeDirectory}/ly-session.log ${config.home.homeDirectory}/.ly-session.log"
         "[workspace special:scratchpad silent] ${terminal.name}"
       ];
       monitor = [ "DP-3,2560x1440@180,0x0,1,bitdepth,10,cm,hdr,sdrbrightness,1.4,vrr,3" ];
