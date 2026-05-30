@@ -594,16 +594,16 @@ in {
       enable = true;
       settings.profile = [
         {
-          time = "00:00";
+          time = "06:00";
           identity = true;
         }
         {
-          time = "10:00";
+          time = "15:00";
           temperature = 5500;
           gamma = 0.95;
         }
         {
-          time = "13:00";
+          time = "17:00";
           temperature = 4000;
           gamma = 0.75;
         }
