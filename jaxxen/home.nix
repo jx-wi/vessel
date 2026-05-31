@@ -140,6 +140,7 @@ in {
     claude-code = {
       enable = true;
       settings = {
+        model = "claude-opus-4-8";
         theme = "dark";
         permissions = {
           defaultMode = "plan";
