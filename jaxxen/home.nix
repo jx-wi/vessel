@@ -459,30 +459,6 @@ in {
           ];
         }
         {
-          run = ''shell -- ya emit cd "${config.home.homeDirectory}/Projects/vessel/$(hostname)"'';
-          desc = "Go to this system's unique config";
-          on = [
-            "g"
-            "s"
-          ];
-        }
-        {
-          run = "cd ${config.home.homeDirectory}/Projects/vessel/${config.home.username}";
-          desc = "Go to this user's unique home config";
-          on = [
-            "g"
-            "u"
-          ];
-        }
-        {
-          run = "shell --block -- nh home switch ; echo '\nPress enter to exit\n' && read";
-          desc = "Update home-manager";
-          on = [
-            "u"
-            "h"
-          ];
-        }
-        {
           run = ''shell --block -- umount "$0"'';
           desc = "Unmount highlighted directory";
           on = [
@@ -491,19 +467,35 @@ in {
           ];
         }
         {
-          run = "shell --block -- nh os switch --update ; echo '\nPress enter to exit\n' && read";
-          desc = "Update flake & NixOS";
+          run = ''shell -- ya emit cd "${config.home.homeDirectory}/Projects/vessel/$(hostname)"'';
+          desc = "Go to this system's config";
           on = [
-            "U"
-            "o"
+            "g"
+            "s"
           ];
         }
         {
           run = "shell --block -- nh os switch ; echo '\nPress enter to exit\n' && read";
-          desc = "Update NixOS";
+          desc = "Update this system";
           on = [
             "u"
-            "o"
+            "s"
+          ];
+        }
+        {
+          run = "cd ${config.home.homeDirectory}/Projects/vessel/${config.home.username}";
+          desc = "Go to this user's home config";
+          on = [
+            "g"
+            "u"
+          ];
+        }
+        {
+          run = "shell --block -- nh home switch ; echo '\nPress enter to exit\n' && read";
+          desc = "Update this user's home-manager";
+          on = [
+            "u"
+            "h"
           ];
         }
       ];
