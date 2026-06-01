@@ -245,7 +245,6 @@
   };
   environment = {
     binsh = "${pkgs.dash}/bin/dash";
-    enableAllTerminfo = true;
     systemPackages = with pkgs; [
       age
       qemu_kvm
@@ -253,6 +252,11 @@
       sops
       ssh-to-age
       swtpm
+      alacritty.terminfo
+      foot.terminfo
+      ghostty.terminfo
+      kitty.terminfo
+      wezterm.terminfo
     ];
     persistence."/persist" = {
       hideMounts = true;
