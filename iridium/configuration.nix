@@ -219,7 +219,7 @@
       };
     };
     sunshine = {
-      enable = true;
+      enable = false;
       autoStart = false;
       capSysAdmin = true;
       package = pkgs.sunshine.override {

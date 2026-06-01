@@ -736,7 +736,7 @@ in {
       permission = [
         { _args = [ "${pkgs.grim}/bin/grim" "screencopy" "allow" ]; }
         { _args = [ "${pkgs.hyprlock}/bin/hyprlock" "screencopy" "allow" ]; }
-        { _args = [ "${pkgs.sunshine.override { cudaSupport = true; }}/bin/sunshine" "screencopy" "allow" ]; }
+        # { _args = [ "${pkgs.sunshine.override { cudaSupport = true; }}/bin/sunshine" "screencopy" "allow" ]; }
       ];
       config = {
         ecosystem = {
