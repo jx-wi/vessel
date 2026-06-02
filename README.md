@@ -4,7 +4,7 @@
 
 ***100% reproducible from this repository.***
 
-[![flake check](https://github.com/jx-wi/vessel/actions/workflows/flake-check.yml/badge.svg)](https://github.com/jx-wi/vessel/actions/workflows/flake-check.yml) [![NixOS](https://img.shields.io/badge/NixOS-25.11-5277C3?logo=nixos&logoColor=white)](https://nixos.org) [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![flake check](https://github.com/jx-wi/vessel/actions/workflows/flake-check.yml/badge.svg)](https://github.com/jx-wi/vessel/actions/workflows/flake-check.yml) [![NixOS](https://img.shields.io/badge/NixOS-26.05-5277C3?logo=nixos&logoColor=white)](https://nixos.org) [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
