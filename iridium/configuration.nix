@@ -30,7 +30,7 @@
       "steam-unwrapped"
     ] || pkgs._cuda.lib.allowUnfreeCudaPredicate pkg;
   };
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     kernelParams = [ "threadirqs" ];
