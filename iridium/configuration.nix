@@ -147,6 +147,11 @@
     protectKernelImage = true;
     # lockKernelModules = true; # incompatible with the current setup
     rtkit.enable = true;
+    # Drop the cap_sys_nice that programs.hyprland's wrapper grants: it leaks
+    # into every child app's ambient set, so xdg-desktop-portal (capless) fails
+    # cap_ptrace_access_check on the app's /proc/PID/root and screen sharing
+    # breaks for Chromium/Electron apps. We forgo Hyprland's self-SCHED_RR.
+    wrappers.Hyprland.capabilities = lib.mkForce "";
     sudo-rs = {
       enable = true;
       execWheelOnly = true;
