@@ -30,13 +30,13 @@ nix flake check              # Check the flake
 
 ## Git workflow
 
-`main` is branch-protected — never push directly. Always branch, push the branch, and open a PR. CI runs `nix flake check` on PRs automatically.
+`main` is branch-protected — never push directly. CI runs `nix flake check` on PRs automatically.
 
-```bash
-git checkout -b your-branch
-# make changes, commit
-git push origin your-branch
-```
+Commit cycle (split between Claude and Jaxxen):
+- **Claude**: create the branch (`git checkout -b <branch>`), make changes, and commit locally. Stop there — do **not** push or open PRs.
+- **Jaxxen**: pushes the branch, opens + merges the PR on GitHub, then deletes ("nukes") the local clone and re-clones fresh.
+
+After committing, hand off to Jaxxen and wait for the fresh re-clone before continuing dependent work.
 
 ## Key Patterns
 
