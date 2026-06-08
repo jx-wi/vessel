@@ -67,7 +67,9 @@ in {
       xdg-desktop-portal-termfilechooser
     ] ++ zsh.packages ++ utils;
   };
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "claude-code" ] || pkgs._cuda.lib.allowUnfreeCudaPredicate pkg;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "claude-code"
+  ];
   news.display = "silent";
   fonts.fontconfig = {
     enable = true;
