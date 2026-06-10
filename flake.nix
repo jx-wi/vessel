@@ -78,5 +78,6 @@
         };
       };
     };
+    formatter.${system} = pkgs.nixfmt;
   };
 }
