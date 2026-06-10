@@ -10,7 +10,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence.url = "github:nix-community/impermanence";
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +45,7 @@
     pkgs = import nixpkgs {
       inherit system;
     };
-    lib = nixpkgs.lib;
+    inherit (nixpkgs) lib;
   in {
     nixosConfigurations.iridium = lib.nixosSystem {
       inherit system;
@@ -75,5 +78,6 @@
         };
       };
     };
+    formatter.${system} = pkgs.nixfmt;
   };
 }

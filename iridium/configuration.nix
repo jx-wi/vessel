@@ -19,7 +19,6 @@
     use-xdg-base-directories = true;
   };
   nixpkgs.config = {
-    cudaSupport = true;
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "nvidia-persistenced"
       "nvidia-settings"
@@ -28,7 +27,11 @@
       "steam-original"
       "steam-run"
       "steam-unwrapped"
-    ] || pkgs._cuda.lib.allowUnfreeCudaPredicate pkg;
+    ];
+    # Unused while no CUDA build is in the closure (cudaSupport unset,
+    # sunshine/ollama disabled) — dropping it yields a byte-identical system.
+    # Re-enable by changing the `];` above to:
+    #   ] || pkgs._cuda.lib.allowUnfreeCudaPredicate pkg;
   };
   system.stateVersion = "26.05";
   boot = {
@@ -134,7 +137,6 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        cudaPackages.cudatoolkit
         nvidia-vaapi-driver
         vulkan-loader
         vulkan-validation-layers
