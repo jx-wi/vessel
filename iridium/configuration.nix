@@ -27,7 +27,11 @@
       "steam-original"
       "steam-run"
       "steam-unwrapped"
-    ] || pkgs._cuda.lib.allowUnfreeCudaPredicate pkg;
+    ];
+    # Unused while no CUDA build is in the closure (cudaSupport unset,
+    # sunshine/ollama disabled) — dropping it yields a byte-identical system.
+    # Re-enable by changing the `];` above to:
+    #   ] || pkgs._cuda.lib.allowUnfreeCudaPredicate pkg;
   };
   system.stateVersion = "26.05";
   boot = {

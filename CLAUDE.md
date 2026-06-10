@@ -61,7 +61,7 @@ sops secrets/path/to/file.yaml
 New secret files must be added to `.sops.yaml` and referenced in `iridium/configuration.nix` under `sops.secrets`.
 
 ### Unfree packages
-Whitelisted explicitly via `nixpkgs.config.allowUnfreePredicate`. System-scope unfree packages go in `iridium/configuration.nix`; user-scope ones go in `jaxxen/home.nix`. Add to the relevant `builtins.elem` list. `iridium/configuration.nix` also ORs in `pkgs._cuda.lib.allowUnfreeCudaPredicate` to permit unfree CUDA dependencies. CUDA is **not** enabled system-wide (`cudaSupport` is unset); the predicate stays dormant unless `services.sunshine` is re-enabled, since its package overrides `cudaSupport = true` on just that build.
+Whitelisted explicitly via `nixpkgs.config.allowUnfreePredicate`. System-scope unfree packages go in `iridium/configuration.nix`; user-scope ones go in `jaxxen/home.nix`. Add to the relevant `builtins.elem` list. A `pkgs._cuda.lib.allowUnfreeCudaPredicate` clause is present but **commented out** in `iridium/configuration.nix`: CUDA is not enabled system-wide (`cudaSupport` is unset) and nothing in the closure needs it. Uncomment it if you re-enable a CUDA build such as `services.sunshine`, whose package overrides `cudaSupport = true`.
 
 ### Home-manager standalone
 Jaxxen's home-manager runs standalone via Rehomify — no system-level home-manager integration. Changes to `jaxxen/` only require `nh home switch`, not a full system rebuild.
