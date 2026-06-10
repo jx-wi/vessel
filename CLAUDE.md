@@ -38,6 +38,14 @@ Commit cycle (split between Claude and Jaxxen):
 
 After committing, hand off to Jaxxen and wait for the fresh re-clone before continuing dependent work.
 
+## Automatic updates
+
+The system tracks `main` hands-off via two weekly jobs:
+- **`.github/workflows/flake-update.yml`** (Mon 06:00 UTC) — runs `nix flake update`, opens a PR, and **auto-merges** it (squash) once `flake-check` passes.
+- **`nh-os-switch` systemd timer** (`iridium/configuration.nix`, Mon 11:00 local) — pulls `github:jx-wi/vessel` and runs `nh os switch` as root.
+
+So input bumps land and activate with no manual step, gated only by `flake-check` going green (`nix flake check` + the dry-run builds + the statix/deadnix lint). This is deliberate hands-off operation; the trade-off is that unreviewed upstream changes activate as root, which is why keeping that gate meaningful matters. To intervene, merge or close the weekly PR before the timer fires, or run `nh os switch --update` yourself.
+
 ## Key Patterns
 
 ### Impermanence
