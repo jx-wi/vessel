@@ -99,8 +99,7 @@ in {
     };
     font = {
       name = font.family;
-      package = font.package;
-      size = font.size;
+      inherit (font) package size;
     };
   };
   qt = {

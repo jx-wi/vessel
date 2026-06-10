@@ -45,7 +45,7 @@
     pkgs = import nixpkgs {
       inherit system;
     };
-    lib = nixpkgs.lib;
+    inherit (nixpkgs) lib;
   in {
     nixosConfigurations.iridium = lib.nixosSystem {
       inherit system;
