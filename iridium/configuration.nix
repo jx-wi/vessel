@@ -19,7 +19,6 @@
     use-xdg-base-directories = true;
   };
   nixpkgs.config = {
-    cudaSupport = true;
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
       "nvidia-persistenced"
       "nvidia-settings"
@@ -134,7 +133,6 @@
       enable = true;
       enable32Bit = true;
       extraPackages = with pkgs; [
-        cudaPackages.cudatoolkit
         nvidia-vaapi-driver
         vulkan-loader
         vulkan-validation-layers
