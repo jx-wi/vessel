@@ -41,7 +41,9 @@ After committing, hand off to Jaxxen and wait for the fresh re-clone before cont
 ## Key Patterns
 
 ### Impermanence
-`@` and `@home` btrfs subvolumes roll back on every boot via an initrd service defined in `iridium/configuration.nix`. Anything that must survive reboots must be declared under `environment.persistence."/persist"`. User-level directories go in `users.jaxxen.directories`.
+Only the `@` (`/`) and `@home` (`/home`) btrfs subvolumes roll back on every boot, via an initrd service defined in `iridium/configuration.nix`. Anything on them that must survive reboots must be declared under `environment.persistence."/persist"`. User-level directories go in `users.jaxxen.directories`.
+
+The other subvolumes are **not** rolled back and persist on their own: `@nix` (`/nix`), `@persist` (`/persist`), `@swap` (`/swap`), and `@var` (`/var`). Because `@var` is never wiped, `/var` persists wholesale — *and* `/var/lib` + `/var/log` are additionally bind-mounted from `/persist`. That overlap is redundant and means paths like `/var/tmp` and `/var/cache` also survive reboots. Reconciling it is an install-time `disks.nix` change, so it is left as-is for now.
 
 ### Secrets (sops-nix)
 Age decryption key is derived from the SSH host key at `/var/lib/ssh/ssh_host_ed25519_key`. To edit secrets:
