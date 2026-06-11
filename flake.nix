@@ -2,6 +2,10 @@
   description = "Workstations, home-manager environments, and devShells of Jaxxen";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    claude-code = {
+      url = "github:ryoppippi/nix-claude-code";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +35,7 @@
   };
   outputs = inputs @ {
     nixpkgs,
+    claude-code,
     disko,
     home-manager,
     impermanence,
@@ -44,6 +49,7 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
+      overlays = [ claude-code.overlays.default ];
     };
     inherit (nixpkgs) lib;
   in {

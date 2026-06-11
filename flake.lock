@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "claude-code": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781146851,
+        "narHash": "sha256-+AWRZLbkDhfB2ibS4Ps7sarbxcOowrZlTjXjW9Wc4Nw=",
+        "owner": "ryoppippi",
+        "repo": "nix-claude-code",
+        "rev": "34b981b6740624b595f8da0ab8af2ad38f516ad6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ryoppippi",
+        "repo": "nix-claude-code",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1765145449,
@@ -271,6 +291,7 @@
     },
     "root": {
       "inputs": {
+        "claude-code": "claude-code",
         "disko": "disko",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
