@@ -8,7 +8,17 @@
 
 ---
 
-**[Iridium](#iridium) · [Jaxxen's home-manager](#jaxxens-home-manager) · [Dev shell](#dev-shell)**
+**[Iridium](#iridium) · [Jaxxen's home-manager](#jaxxens-home-manager) · [Dev shell](#dev-shell) · [Maintenance](#maintenance) · [License](#license)**
+
+---
+
+Three things, one flake:
+
+- **[Iridium](#iridium)** — a hardened NixOS workstation. Secure Boot end to end (Lanzaboote), a LUKS2-encrypted disk that can auto-unlock via TPM2, a root filesystem that rolls back to a clean state on every boot, and secrets sealed with sops-nix.
+- **[Jaxxen's home-manager](#jaxxens-home-manager)** — a standalone user environment (Hyprland desktop, Zsh, Nixvim) that applies without touching the system and rides along on Iridium via [Rehomify](https://github.com/Ryokune/rehomify).
+- **[Dev shell](#dev-shell)** — the same Zsh + Nixvim editing experience, one `nix develop` away on any machine with Nix.
+
+It is **declarative and reproducible** — the whole machine is rebuilt from this repository — and **hands-off**: input updates land and activate weekly on their own, gated only by `nix flake check` (see [Maintenance](#maintenance)).
 
 ---
 
@@ -16,12 +26,12 @@
 
 ### About
 
-- **System:** NixOS + Zen kernel + Lanzaboote (Secure Boot) + NVIDIA drivers + CUDA
-- **Disk:** LUKS2 (argon2id, iter-time 5000) → btrfs subvolumes
+- **System:** NixOS + Zen kernel + Lanzaboote (Secure Boot) + NVIDIA drivers
+- **Disk:** LUKS2 (argon2id, iter-time 5000) → btrfs subvolumes, optionally TPM2-unlocked
 - **Impermanence:** Rollback service wipes `@` and `@home` on every boot; declared portions of state persist at `/persist`
 - **Rehomify:** Standalone home-manager configuration(s) reapplied on boot via [Rehomify](https://github.com/Ryokune/rehomify)
 - **Secrets:** sops-nix/age, age key derived from SSH host key at `/var/lib/ssh/ssh_host_ed25519_key`
-- **Network:** NetworkManager + DHCP + Tailscale (tag:iridium)
+- **Network:** NetworkManager + DHCP, Tailscale (tag:iridium), Quad9 DNS over TLS with DNSSEC
 
 ### Installation
 
@@ -157,3 +167,38 @@ nh home switch github:jx-wi/vessel
 ```bash
 nix develop github:jx-wi/vessel
 ```
+
+---
+
+## Maintenance
+
+### Rebuilding
+
+Apply changes after editing the flake:
+
+```bash
+nh os switch              # rebuild + activate the NixOS system (Iridium)
+nh home switch            # rebuild + activate Jaxxen's home-manager
+nh os switch --update     # bump flake inputs, then rebuild the system
+nix flake check           # what CI runs on every PR
+```
+
+> [!NOTE]
+> `main` is branch-protected — never push to it directly. Open a PR; CI runs `nix flake check` automatically.
+
+### Hands-off updates
+
+Iridium keeps itself current against `main` with no manual step, via two weekly jobs:
+
+| When (UTC / local) | What |
+|---|---|
+| Mon 06:00 UTC | [`flake-update.yml`](.github/workflows/flake-update.yml) runs `nix flake update`, opens a PR, and **auto-merges** it once `flake-check` passes. |
+| Mon 11:00 local | The `nh-os-switch` systemd timer pulls `github:jx-wi/vessel` and runs `nh os switch` as root. |
+
+So upstream input bumps land and activate on their own, gated solely by `nix flake check` going green. That keeps the gate load-bearing — unreviewed upstream changes activate as root — so it's worth keeping meaningful. To intervene, merge or close the weekly PR before the timer fires, or run `nh os switch --update` yourself.
+
+---
+
+## License
+
+MIT © 2025 Jaxxen. See [LICENSE](LICENSE).
