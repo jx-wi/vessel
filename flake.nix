@@ -2,6 +2,13 @@
   description = "Workstations, home-manager environments, and devShells of Jaxxen";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    ccvm = {
+      url = "github:openccvm/ccvm";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        claude-code.follows = "claude-code";
+      };
+    };
     claude-code = {
       url = "github:ryoppippi/nix-claude-code";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +42,7 @@
   };
   outputs = inputs @ {
     nixpkgs,
+    ccvm,
     claude-code,
     disko,
     home-manager,
@@ -71,6 +79,7 @@
         inherit pkgs;
         extraSpecialArgs.addons = inputs.rycee-addons.packages.${system};
         modules = [
+          ccvm.homeModules.ccvm
           nixvim.homeModules.nixvim
           ./jaxxen/home.nix
         ];

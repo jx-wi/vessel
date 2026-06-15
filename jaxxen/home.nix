@@ -114,6 +114,24 @@ in {
     home-manager.enable = true;
     bat.enable = true;
     bottom.enable = true;
+    ccvm = {
+      enable = true;
+      cores = 8;
+      memory = 8192;
+      vmDiskSize = 32;
+      nix.enable = true;
+      egressAllowlist = [
+        "cache.nixos.org"
+        "storage.googleapis.com"
+        "github.com"
+        "api.github.com"
+        "raw.githubusercontent.com"
+        "codeload.github.com"
+        "npmjs.com"
+        "registry.npmjs.org"
+      ];
+      extraPackages = utils;
+    };
     claude-code = {
       enable = true;
       settings = {

@@ -1,5 +1,29 @@
 {
   "nodes": {
+    "ccvm": {
+      "inputs": {
+        "claude-code": [
+          "claude-code"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1781561081,
+        "narHash": "sha256-nTUL6W1qXABmAqDho3b2JwiW5chLyw3DF4gBkDLHv4s=",
+        "owner": "openccvm",
+        "repo": "ccvm",
+        "rev": "4a4c26a75a99ffe8b265f521bc57504ad06f78c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openccvm",
+        "repo": "ccvm",
+        "type": "github"
+      }
+    },
     "claude-code": {
       "inputs": {
         "nixpkgs": [
@@ -291,6 +315,7 @@
     },
     "root": {
       "inputs": {
+        "ccvm": "ccvm",
         "claude-code": "claude-code",
         "disko": "disko",
         "home-manager": "home-manager",
@@ -379,6 +404,27 @@
         "owner": "nix-systems",
         "ref": "future-26.11",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "ccvm",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780220602,
+        "narHash": "sha256-eynAfOmbmxJnkp7YewvCEbShNnnYJ9gLLqkzsYtBPeM=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "db947814a175b7ca6ded66e21383d938df01c227",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     }
