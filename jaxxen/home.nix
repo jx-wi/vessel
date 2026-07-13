@@ -470,6 +470,38 @@ in {
       };
       keymap.mgr.prepend_keymap = [
         {
+          run = "cd ${config.home.homeDirectory}/Projects";
+          desc = "Go to ~/Projects";
+          on = [
+            "g"
+            "p"
+          ];
+        }
+        {
+          run = "cd ${config.home.homeDirectory}/Pictures";
+          desc = "Go to ~/Pictures";
+          on = [
+            "g"
+            "P"
+          ];
+        }
+        {
+          run = "cd ${config.home.homeDirectory}/Documents";
+          desc = "Go to ~/Documents";
+          on = [
+            "g"
+            "d"
+          ];
+        }
+        {
+          run = "cd ${config.home.homeDirectory}/Downloads";
+          desc = "Go to ~/Downloads";
+          on = [
+            "g"
+            "D"
+          ];
+        }
+        {
           run = "cd /run/media/${config.home.username}";
           desc = "Go to media mounts";
           on = [
