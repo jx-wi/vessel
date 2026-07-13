@@ -272,16 +272,19 @@
         "/var/lib"
         "/var/log"
       ];
-      users.jaxxen.directories = [
-        ".claude"
-        ".librewolf"
-        ".local/share"
-        ".local/state/nix"
-        ".ollama"
-        "Documents"
-        "Pictures"
-        "Projects"
-      ];
+      users.jaxxen = {
+        directories = [
+          ".claude"
+          ".librewolf"
+          ".local/share"
+          ".local/state/nix"
+          ".ollama"
+          "Documents"
+          "Pictures"
+          "Projects"
+        ];
+        files = [ ".ssh/known_hosts" ];
+      };
     };
   };
   programs = {
