@@ -14,7 +14,7 @@ let
   };
   terminal = {
     name = "ghostty";
-    command = "ghostty +new-window -e";
+    command = "${pkgs.ghostty}/bin/ghostty +new-window -e";
   };
   font = {
     family = "Maple Mono NF";
@@ -37,6 +37,7 @@ in {
       WINE_FULLSCREEN_FSR = "1";
     };
     pointerCursor = {
+      enable = true;
       name = "Bibata-Modern-Ice";
       size = 12;
       gtk.enable = true;
@@ -136,6 +137,7 @@ in {
       enable = true;
       settings = {
         model = "claude-opus-4-8";
+        effortLevel = "xhigh";
         theme = "dark";
         permissions = {
           defaultMode = "plan";
@@ -902,7 +904,7 @@ in {
         (kb "${mod} + ALT + S" (exec "chromium"))
         (kb "${mod} + M" (exec "chromium --app=https://app.element.io"))
         (kb "${mod} + C" (exec "chromium --app=https://claude.ai"))
-        (kb "${mod} + ALT + M" (exec "${terminal.command} zsh -c 'nix run nixpkgs#signal-desktop'"))
+        (kb "${mod} + ALT + M" (exec "${pkgs.signal-desktop}/bin/signal-desktop"))
         (kb "${mod} + N" (exec "${terminal.command} zsh -c 'nix run nixpkgs#qbittorrent'"))
         (kb "${mod} + T" (exec "${terminal.command} zsh -c 'nix run nixpkgs#tor-browser'"))
         (kb "${mod} + R" (exec "killall rofi || rofi -show drun"))
