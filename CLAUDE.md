@@ -26,6 +26,7 @@ nh home switch               # Apply home-manager changes
 nh os switch                 # Apply NixOS changes
 nh os switch --update        # Update flake inputs + apply NixOS
 nix flake check              # Check the flake
+./ci.sh                      # Run the same checks as CI locally (before committing)
 ```
 
 ## Git workflow
@@ -33,7 +34,7 @@ nix flake check              # Check the flake
 `main` is branch-protected — never push directly. CI runs `nix flake check` on PRs automatically.
 
 Commit cycle (split between Claude and Jaxxen):
-- **Claude**: create the branch (`git checkout -b <branch>`), make changes, and commit locally. Stop there — do **not** push or open PRs.
+- **Claude**: create the branch (`git checkout -b <branch>`), make changes, run `./ci.sh` (the same checks CI runs) before committing, and commit locally. Stop there — do **not** push or open PRs.
 - **Jaxxen**: pushes the branch, opens + merges the PR on GitHub, then deletes ("nukes") the local clone and re-clones fresh.
 
 After committing, hand off to Jaxxen and wait for the fresh re-clone before continuing dependent work.
