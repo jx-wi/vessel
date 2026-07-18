@@ -181,6 +181,7 @@ nh os switch              # rebuild + activate the NixOS system (Iridium)
 nh home switch            # rebuild + activate Jaxxen's home-manager
 nh os switch --update     # bump flake inputs, then rebuild the system
 nix flake check           # what CI runs on every PR
+./ci.sh                   # run the full CI suite locally, before committing
 ```
 
 > [!NOTE]
