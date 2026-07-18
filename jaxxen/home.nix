@@ -139,6 +139,10 @@ in {
         model = "claude-opus-4-8";
         effortLevel = "xhigh";
         theme = "dark";
+        attribution = {
+          commit = "Co-authored-by: Claude <noreply@anthropic.com>";
+          pr = "";
+        };
         permissions = {
           defaultMode = "plan";
           allow = [
