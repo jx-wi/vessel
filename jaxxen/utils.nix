@@ -20,6 +20,7 @@ with pkgs; [
   nh
   nix-tree
   nixfmt
+  python3
   ripgrep
   skim
   smem
