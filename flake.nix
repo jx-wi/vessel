@@ -1,7 +1,7 @@
 {
   description = "Workstations, home-manager environments, and devShells of Jaxxen";
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     ccvm = {
       url = "github:openccvm/ccvm";
       inputs = {
