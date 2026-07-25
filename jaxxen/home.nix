@@ -126,7 +126,7 @@ in {
     claude-code = {
       enable = true;
       settings = {
-        model = "claude-opus-4-8";
+        model = "opus";
         effortLevel = "xhigh";
         theme = "dark";
         attribution = {
