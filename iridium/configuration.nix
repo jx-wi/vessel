@@ -320,7 +320,10 @@
           "wheel"
           "wireshark"
         ];
-        openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWrjxRDOFFjLrE478wvGte8DfKPExV21D3FD0fyaC5p jaxxen@vessel" ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWrjxRDOFFjLrE478wvGte8DfKPExV21D3FD0fyaC5p jaxxen@vessel"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO8yGeQyVrqgNsn5wEciSjZMh/JkDE/h/G99ugxZT05R jaxxen@yttrium"
+        ];
         hashedPasswordFile = config.sops.secrets.jaxxen_hashed_password.path;
       };
       root.hashedPassword = "!";
