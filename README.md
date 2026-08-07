@@ -141,7 +141,7 @@ Reboot and verify LUKS unlocks automatically without a passphrase prompt.
 - **Zsh:** Powerlevel10k instant prompt + autosuggestions + syntax highlighting + vim-style navigation
 - **Nixvim:** Treesitter + LSP for nix/md/js/ts/py
 - **Desktop:** Personalized Hyprland + Ghostty + Rofi + Dunst + LibreWolf
-- **Theme:** Maple Mono NF + TokyoNight Night (Ghostty) + Catppuccin Mocha (Nixvim) + Graphite Black (GTK/Qt)
+- **Theme:** Maple Mono NF + TokyoNight Night (Ghostty) + Catppuccin Mocha (Nixvim)
 
 ### Installation
 
