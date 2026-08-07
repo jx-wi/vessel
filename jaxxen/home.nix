@@ -80,37 +80,6 @@ in {
       serif = [ font.family ];
     };
   };
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Graphite-Dark-compact";
-      package = pkgs.graphite-gtk-theme.override {
-        colorVariants = [ "dark" ];
-        sizeVariants = [ "compact" ];
-        tweaks = [
-          "black"
-          "rimless"
-        ];
-      };
-    };
-    gtk4.theme = config.gtk.theme;
-    iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
-    };
-    font = {
-      name = font.family;
-      inherit (font) package size;
-    };
-  };
-  qt = {
-    enable = true;
-    platformTheme.name = "gtk3";
-  };
-  dconf = {
-    enable = true;
-    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
-  };
   programs = {
     home-manager.enable = true;
     bat.enable = true;
