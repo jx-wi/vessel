@@ -17,6 +17,7 @@ with pkgs; [
   jq
   keepassxc
   killall
+  libqalculate
   nh
   nix-tree
   nixfmt
