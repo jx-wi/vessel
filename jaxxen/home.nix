@@ -17,9 +17,16 @@ let
     command = "${pkgs.ghostty}/bin/ghostty +new-window -e";
   };
   font = {
-    family = "Maple Mono NF";
-    size = 12;
-    package = pkgs.maple-mono.NF-unhinted; # if resolution >= 1440p, use NF-unhinted, else use NF
+    mono = {
+      family = "Maple Mono NF";
+      size = 12;
+      package = pkgs.maple-mono.NF-unhinted; # if resolution >= 1440p, use NF-unhinted, else use NF
+    };
+    serif = {
+      family = "Literata";
+      size = 14;
+      package = pkgs.literata;
+    };
   };
 in {
   home = {
@@ -56,7 +63,8 @@ in {
     packages = with pkgs; [
       awww
       claude-monitor
-      font.package
+      font.mono.package
+      font.serif.package
       libreoffice
       playerctl
       quickemu
@@ -74,9 +82,9 @@ in {
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
-      monospace = [ font.family ];
-      sansSerif = [ font.family ];
-      serif = [ font.family ];
+      monospace = [ font.mono.family ];
+      sansSerif = [ font.serif.family ];
+      serif = [ font.serif.family ];
     };
   };
   programs = {
@@ -245,8 +253,8 @@ in {
         background = "#000000";
         background-opacity = 0.7;
         background-blur-radius = 20;
-        font-family = font.family;
-        font-size = font.size;
+        font-family = font.mono.family;
+        font-size = font.mono.size;
         freetype-load-flags = "no-hinting"; # only keep this line if using unhinted font, else comment out
         theme = "TokyoNight Night";
       };
@@ -387,7 +395,7 @@ in {
       enable = true;
       modes = [ "drun" ];
       terminal = terminal.command;
-      font = "${font.family} ${toString font.size}";
+      font = "${font.mono.family} ${toString font.mono.size}";
       extraConfig = {
         drun-display-format = "{name}";
         display-drun = "drun: ";
@@ -533,7 +541,7 @@ in {
       enable = true;
       settings = {
         global = {
-          font = "${font.family} ${toString font.size}";
+          font = "${font.mono.family} ${toString font.mono.size}";
           width = "(128, 1024)";
           height = 128;
           origin = "top-right";
