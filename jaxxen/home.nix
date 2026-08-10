@@ -588,20 +588,6 @@ in {
     ssh-agent.enable = true;
     udiskie.enable = true;
   };
-  systemd.user = {
-    services.gcalcli-remind = {
-      Unit.Description = "Google Calendar reminder notifications";
-      Service = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.gcalcli}/bin/gcalcli remind 10 'dunstify -a gcalcli %%s'";
-      };
-    };
-    timers.gcalcli-remind = {
-      Unit.Description = "Timer for gcalcli reminder checks";
-      Timer.OnCalendar = "*:0/5";
-      Install.WantedBy = [ "timers.target" ];
-    };
-  };
   xdg = {
     portal = {
       enable = true;
