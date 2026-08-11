@@ -577,12 +577,12 @@ in {
           identity = true;
         }
         {
-          time = "15:00";
+          time = "22:30";
           temperature = 5500;
           gamma = 0.95;
         }
         {
-          time = "17:00";
+          time = "00:00";
           temperature = 4000;
           gamma = 0.75;
         }
