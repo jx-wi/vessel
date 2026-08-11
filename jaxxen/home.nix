@@ -104,7 +104,7 @@ in {
       settings = {
         model = "opus";
         effortLevel = "xhigh";
-        theme = "dark";
+        theme = "auto";
         attribution = {
           commit = "Co-authored-by: Claude <noreply@anthropic.com>";
           pr = "";
@@ -295,7 +295,6 @@ in {
           HidePasswords = true;
           AdvancedSettings = true;
           CompactMode = true;
-          ApplicationTheme = "dark";
         };
       };
     };
@@ -537,6 +536,16 @@ in {
     };
   };
   services = {
+    darkman = {
+      enable = true;
+      settings = {
+        lat = 43.07468984247235;
+        lng = -89.3841682686535;
+        usegeoclue = false;
+      };
+      darkModeScripts.gtk = ''${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-dark'"'';
+      lightModeScripts.gtk = ''${pkgs.dconf}/bin/dconf write /org/gnome/desktop/interface/color-scheme "'prefer-light'"'';
+    };
     dunst = {
       enable = true;
       settings = {
