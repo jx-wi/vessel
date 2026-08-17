@@ -525,7 +525,6 @@ in {
     zoxide = {
       enable = true;
       enableZshIntegration = true;
-      options = [ "--cmd cd" ];
     };
     zsh = {
       enable = true;
