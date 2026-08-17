@@ -229,7 +229,7 @@ in {
         push.autoSetupRemote = true;
         user = {
           name = "Jaxxen";
-          email = "github@jaxxen.dev";
+          email = "git@jaxxen.dev";
         };
       };
       ignores = [
