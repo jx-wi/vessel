@@ -890,7 +890,8 @@ in {
         (kb "${mod} + equal" (exec ''cfg=${config.home.homeDirectory}/.config/qalculate/qalc.cfg; caut=calculate_as_you_type; grep -q $caut $cfg 2>/dev/null || echo "$caut=1" >> $cfg; sed -i "s/.*$caut.*/$caut=1/" $cfg; ${terminal.command} qalc''))
         (kb "${mod} + D" (exec "dunstctl close"))
         (kb "${mod} + SHIFT + D" (exec "dunstctl close-all"))
-        (kb "${mod} + minus" (exec "wl-copy -- —"))
+        (kb "${mod} + minus" (exec "wl-copy -- —")) # em-dash
+        (kb "${mod} + ALT + minus" (exec "wl-copy -- –")) # en-dash
         (kb "${mod} + I" (exec "wl-copy -- ∞"))
         (kb "${mod} + Q" (mkLua "hl.dsp.window.close()"))
         (kb "${mod} + F" (mkLua ''hl.dsp.window.float({ action = "toggle" })''))
