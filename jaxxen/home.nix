@@ -331,6 +331,11 @@ in {
           }];
         };
       };
+      policies.ExtensionSettings = {
+        "keepassxc-browser@keepassxc.org".private_browsing = true;
+        "dfyoutube@example.com".private_browsing = true;
+        "{b8326f03-322f-4112-96bd-e7996548d99f}".private_browsing = true;
+      };
     };
     mpv = {
       enable = true;
