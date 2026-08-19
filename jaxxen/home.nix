@@ -302,14 +302,17 @@ in {
       enable = true;
       profiles.${config.home.username} = {
         settings = {
+          "privacy.resistFingerprinting" = false;
+          "privacy.fingerprintingProtection" = true;
+          "privacy.fingerprintingProtection.overrides" = "+AllTargets,-CSSPrefersColorScheme";
           "browser.toolbars.bookmarks.visibility" = "newtab";
           "widget.use-xdg-desktop-portal.file-picker" = 1;
           "extensions.autoDisableScopes" = 0;
+          "widget.use-xdg-desktop-portal.settings" = 1;
         };
         extensions.packages = with addons; [
           ublock-origin
           keepassxc-browser
-          darkreader
           df-youtube
           theater-mode-for-youtube
         ];
