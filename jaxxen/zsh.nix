@@ -3,6 +3,65 @@
   ...
 }:
 let
+
+  # start audio
+
+  channel = "nixos-26.05";
+
+  lofiDefault = { label = "lofi";        url = "https://www.youtube.com/watch?v=rFZHOHl-L8A"; };
+
+  lofiCases = [
+    { name = "summer"; label = "lofi summer"; url = "https://www.youtube.com/watch?v=0muHFBSiybw"; }
+    { name = "sleep";  label = "lofi sleep";  url = "https://www.youtube.com/watch?v=VAlMDl00mYY"; }
+    { name = "jazz";   label = "lofi jazz";   url = "https://www.youtube.com/watch?v=A8jDx9TLMQc"; }
+  ];
+
+  mkCase = { name, label, url }:
+    "${name}) label='${label}'; url='${url}' ;;";
+
+  cases = builtins.concatStringsSep "\n        " (map mkCase lofiCases);
+
+  nixShell = ''nix shell "github:NixOS/nixpkgs/${channel}#streamlink" "github:NixOS/nixpkgs/${channel}#mpv"'';
+
+  streamlinkCmd = ''--command bash -c 'streamlink --quiet --player "$(which mpv)" --player-args "--no-video --really-quiet" "$1" best' -- '';
+
+  displayLabel = ''
+    local cols=$(tput cols)
+    local lines=$(tput lines)
+    local hpad=$(( (cols - ''${#label}) / 2 ))
+    local vpad=$(( (lines - 1) / 2 ))
+    clear
+    printf "%''${vpad}s" "" | tr ' ' '\n'
+    printf "%''${hpad}s" ""
+    printf '\e[1;3m%s\e[0m\n' "$label"
+  '';
+
+  mkFunc = name: body: ''
+    ${name}() {
+      ${body}
+    }
+  '';
+
+  lofiFunc = mkFunc "lofi" ''
+    local label url
+
+    case "''${1:-}" in
+      ${cases}
+      *) label='${lofiDefault.label}'; url='${lofiDefault.url}' ;;
+    esac
+
+    ${displayLabel}
+    ${nixShell} ${streamlinkCmd}"$url" 2>/dev/null
+  '';
+
+  oceanFunc = mkFunc "ocean" ''
+    local label="ocean"
+    ${displayLabel}
+    ${nixShell} ${streamlinkCmd}"https://www.youtube.com/watch?v=vPhg6sc1Mk4" 2>/dev/null
+  '';
+
+  # end audio
+
   instantPrompt = ''
     if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
       source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
@@ -69,9 +128,8 @@ let
       typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
       (( ! $+functions[p10k] )) || p10k reload
     }
-    alias lofi='clear && mpv --no-video --ytdl-format="bestaudio" "https://www.youtube.com/watch?v=CFGLoQIhmow" "https://www.youtube.com/watch?v=8b3fqIBrNW0"'
-    alias lofi-sleep='clear && mpv --no-video --ytdl-format="bestaudio" "https://www.youtube.com/watch?v=UJs6__K7gSY"'
-    alias ocean='clear && mpv --no-video --ytdl-format="bestaudio" "https://www.youtube.com/watch?v=vPhg6sc1Mk4"'
+    ${lofiFunc}
+    ${oceanFunc}
   '';
 in {
   inherit instantPrompt pluginsAndConfig;
