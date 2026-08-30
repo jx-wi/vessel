@@ -69,7 +69,7 @@ Jaxxen's home-manager runs standalone via Rehomify — no system-level home-mana
 
 ### Hyprland keybinds (mod = Super)
 - `Super+C` — Web Claude (chromium app)
-- `Super+Return` — Ghostty terminal
+- `Super+Return` — Terminal
 - `Super+V` — Neovim
 - `Super+E` — Yazi file manager
 - `Super+S` — LibreWolf browser

@@ -13,8 +13,8 @@ let
     inherit pkgs;
   };
   terminal = {
-    name = "ghostty";
-    command = "${pkgs.ghostty}/bin/ghostty +new-window -e";
+    name = "wezterm";
+    command = "${pkgs.wezterm}/bin/wezterm -e";
   };
   font = {
     mono = {
@@ -241,24 +241,6 @@ in {
       ];
     };
     gitui.enable = true;
-    ghostty = {
-      enable = true;
-      enableZshIntegration = true;
-      installVimSyntax = true;
-      settings = {
-        confirm-close-surface = false;
-        gtk-single-instance = true;
-        quit-after-last-window-closed = false;
-        window-decoration = "server";
-        background = "#000000";
-        background-opacity = 0.7;
-        background-blur-radius = 20;
-        font-family = font.mono.family;
-        font-size = font.mono.size;
-        freetype-load-flags = "no-hinting"; # only keep this line if using unhinted font, else comment out
-        theme = "TokyoNight Night";
-      };
-    };
     hyprlock.enable = true;
     hyprshot = {
       enable = true;
@@ -434,6 +416,24 @@ in {
     skim = {
       enable = true;
       enableZshIntegration = true;
+    };
+    wezterm = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+        color_scheme = "tokyonight_night";
+        colors.background = "#000000";
+        font = lib.generators.mkLuaInline ''wezterm.font("${font.mono.family}")'';
+        font_size = font.mono.size;
+        freetype_load_flags = "NO_HINTING"; # only keep this line if using unhinted font; else comment out
+        hide_tab_bar_if_only_one_tab = true;
+        window_padding = {
+          left = 0;
+          right = 0;
+          top = 0;
+          bottom = 0;
+        };
+      };
     };
     yazi = {
       enable = true;
@@ -632,42 +632,42 @@ in {
       };
     };
     configFile."xdg-desktop-portal-termfilechooser/config".text = let
-    wrapper = pkgs.writers.writeDash "yazi-filechooser" ''
-      set -e
-      multiple="$1"
-      directory="$2"
-      save="$3"
-      path="$4"
-      out="$5"
-      if [ "$save" = "1" ]; then
-        set -- --chooser-file="$out" "$path"
-      elif [ "$directory" = "1" ]; then
-        set -- --chooser-file="$out" --cwd-file="$out".1 "$path"
-      elif [ "$multiple" = "1" ]; then
-        set -- --chooser-file="$out" "$path"
-      else
-        set -- --chooser-file="$out" "$path"
-      fi
-      fifo=$(mktemp -u /tmp/tfc-fifo.XXXXXX)
-      mkfifo "$fifo"
-      inner="yazi"
-      for arg in "$@"; do
-        escaped=$(printf "%s" "$arg" | sed 's/"/\\"/g')
-        inner="$inner \"$escaped\""
-      done
-      inner="$inner; echo x > \"$fifo\""
-      sh -c "$TERMCMD sh -c '$inner'"
-      read _ < "$fifo"
-      rm -f "$fifo"
-      if [ "$directory" = "1" ]; then
-        if [ ! -s "$out" ] && [ -s "$out".1 ]; then
-          cat "$out".1 > "$out"
-          rm "$out".1
+      wrapper = pkgs.writers.writeDash "yazi-filechooser" ''
+        set -e
+        multiple="$1"
+        directory="$2"
+        save="$3"
+        path="$4"
+        out="$5"
+        if [ "$save" = "1" ]; then
+          set -- --chooser-file="$out" "$path"
+        elif [ "$directory" = "1" ]; then
+          set -- --chooser-file="$out" --cwd-file="$out".1 "$path"
+        elif [ "$multiple" = "1" ]; then
+          set -- --chooser-file="$out" "$path"
         else
-          rm "$out".1
+          set -- --chooser-file="$out" "$path"
         fi
-      fi
-    '';
+        fifo=$(mktemp -u /tmp/tfc-fifo.XXXXXX)
+        mkfifo "$fifo"
+        inner="yazi"
+        for arg in "$@"; do
+          escaped=$(printf "%s" "$arg" | sed 's/"/\\"/g')
+          inner="$inner \"$escaped\""
+        done
+        inner="$inner; echo x > \"$fifo\""
+        ${pkgs.wezterm}/bin/wezterm start --always-new-process -- sh -c "$inner" &
+        read _ < "$fifo"
+        rm -f "$fifo"
+        if [ "$directory" = "1" ]; then
+          if [ ! -s "$out" ] && [ -s "$out".1 ]; then
+            cat "$out".1 > "$out"
+            rm "$out".1
+          else
+            rm -f "$out".1
+          fi
+        fi
+      '';
     in ''
       [filechooser]
       cmd = ${wrapper}
@@ -813,6 +813,7 @@ in {
         dwindle.preserve_split = true;
         master.new_status = "master";
         misc = {
+          enable_anr_dialog = false;
           force_default_wallpaper = 0;
           disable_hyprland_logo = true;
         };
@@ -876,7 +877,6 @@ in {
             hl.exec_cmd("awww-daemon")
             hl.exec_cmd("awww clear 000000")
             hl.exec_cmd("mv ${config.home.homeDirectory}/ly-session.log ${config.home.homeDirectory}/.ly-session.log")
-            hl.exec_cmd("${terminal.name}", { workspace = "special:scratchpad silent" })
           end'')
       ];
       bind = [
