@@ -172,13 +172,6 @@
         key = "hashed_password";
         neededForUsers = true;
       };
-      accounts_keyfile = {
-        sopsFile = ../secrets/jaxxen/accounts_keyfile.yaml;
-        key = "accounts_key";
-        owner = "jaxxen";
-        mode = "0400";
-        path = "/run/secrets/jaxxen/accounts.key";
-      };
     };
   };
   services = {

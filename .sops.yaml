@@ -17,8 +17,3 @@ creation_rules:
       - age:
         - *admin
         - *iridium
-  - path_regex: secrets/jaxxen/accounts_keyfile\.yaml$
-    key_groups:
-      - age:
-        - *admin
-        - *iridium
