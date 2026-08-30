@@ -17,3 +17,8 @@ creation_rules:
       - age:
         - *admin
         - *iridium
+  - path_regex: secrets/iridium/authorized_passkeys\.yaml$
+    key_groups:
+      - age:
+        - *admin
+        - *iridium

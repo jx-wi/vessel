@@ -145,7 +145,23 @@
   };
   powerManagement.cpuFreqGovernor = "performance";
   security = {
-    pam.services.su.rootOK = lib.mkForce false;
+    pam = {
+      services = {
+        su.rootOK = lib.mkForce false;
+        login.u2fAuth = true;
+        sudo.u2fAuth = true;
+        ly.u2fAuth = true;
+      };
+      u2f = {
+        enable = true;
+        control = "sufficient";
+        settings = {
+          authfile = config.sops.secrets.authorized_passkeys.path;
+          cue = true;
+          cue_prompt = "Touch the gold on the key to continue.";
+        };
+      };
+    };
     protectKernelImage = true;
     # lockKernelModules = true; # incompatible with the current setup
     rtkit.enable = true;
@@ -170,6 +186,11 @@
       jaxxen_hashed_password = {
         sopsFile = ../secrets/iridium/jaxxen/password.yaml;
         key = "hashed_password";
+        neededForUsers = true;
+      };
+      authorized_passkeys = {
+        sopsFile = ../secrets/iridium/authorized_passkeys.yaml;
+        key = "authorized_passkeys";
         neededForUsers = true;
       };
     };
@@ -292,6 +313,7 @@
     };
     steam.enable = true;
     wireshark.enable = true;
+    yubikey-manager.enable = true;
     zsh.enable = true;
   };
   users = {
