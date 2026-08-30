@@ -346,12 +346,12 @@
   };
   systemd = {
     services.nh-os-switch = {
-      description = "Run nh os switch github:jx-wi/vessel";
+      description = "Run nh os switch github:jaxxen-dev/vessel";
       after = [ "network-online.target" ];
       wants = [ "network-online.target" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${pkgs.nh}/bin/nh os switch github:jx-wi/vessel";
+        ExecStart = "${pkgs.nh}/bin/nh os switch github:jaxxen-dev/vessel";
         StandardOutput = "journal";
         StandardError = "journal";
       };

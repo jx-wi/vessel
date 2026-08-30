@@ -4,7 +4,7 @@
 
 ***100% reproducible from this repository.***
 
-[![flake check](https://github.com/jx-wi/vessel/actions/workflows/flake-check.yml/badge.svg)](https://github.com/jx-wi/vessel/actions/workflows/flake-check.yml) [![NixOS](https://img.shields.io/badge/NixOS-26.05-5277C3?logo=nixos&logoColor=white)](https://nixos.org) [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![flake check](https://github.com/jaxxen-dev/vessel/actions/workflows/flake-check.yml/badge.svg)](https://github.com/jaxxen-dev/vessel/actions/workflows/flake-check.yml) [![NixOS](https://img.shields.io/badge/NixOS-26.05-5277C3?logo=nixos&logoColor=white)](https://nixos.org) [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 ---
 
@@ -58,7 +58,7 @@ sudo -i
 ```
 
 ```bash
-git clone https://github.com/jx-wi/vessel.git
+git clone https://github.com/jaxxen-dev/vessel.git
 nix --experimental-features "nix-command flakes" run nixpkgs#disko -- --mode destroy,format,mount vessel/iridium/disks.nix
 ```
 
@@ -148,7 +148,7 @@ Reboot and verify LUKS unlocks automatically without a passphrase prompt.
 While logged in as jaxxen:
 
 ```bash
-nh home switch github:jx-wi/vessel
+nh home switch github:jaxxen-dev/vessel
 ```
 
 ---
@@ -165,7 +165,7 @@ nh home switch github:jx-wi/vessel
 ### Usage
 
 ```bash
-nix develop github:jx-wi/vessel
+nix develop github:jaxxen-dev/vessel
 ```
 
 ---
@@ -194,7 +194,7 @@ Iridium keeps itself current against `main` with no manual step, via two weekly 
 | When (UTC / local) | What |
 |---|---|
 | Mon 06:00 UTC | [`flake-update.yml`](.github/workflows/flake-update.yml) runs `nix flake update`, opens a PR, and **auto-merges** it once `flake-check` passes. |
-| Mon 11:00 local | The `nh-os-switch` systemd timer pulls `github:jx-wi/vessel` and runs `nh os switch` as root. |
+| Mon 11:00 local | The `nh-os-switch` systemd timer pulls `github:jaxxen-dev/vessel` and runs `nh os switch` as root. |
 
 So upstream input bumps land and activate on their own, gated solely by `nix flake check` going green. That keeps the gate load-bearing — unreviewed upstream changes activate as root — so it's worth keeping meaningful. To intervene, merge or close the weekly PR before the timer fires, or run `nh os switch --update` yourself.
 
